@@ -1,0 +1,39 @@
+pragma solidity ^0.8.00;
+
+contract Bank 
+{
+    int private bal; // balance variable
+
+    // Constructor: initializes balance to 1
+    constructor() public 
+    {
+        bal = 0;
+    }
+
+    // Function to get current balance
+    function getBalance() public view returns (int) 
+    {
+        return bal;
+    }
+
+    // Function to deposit amount
+    function deposit(int amt) public 
+    {
+        require(amt > 0, "Deposit amount must be positive");
+        bal = bal + amt;
+    }
+
+    // Function to withdraw amount
+    function withdraw(int amt) public 
+    {
+        if (bal < amt) 
+        {
+            // Not enough balance
+            revert("Insufficient balance");
+        } 
+        else 
+        {
+            bal = bal - amt;
+        }
+    }
+}
